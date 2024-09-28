@@ -85,11 +85,10 @@ async function fetchWeather(location = null, longitude = null, latitude = null) 
       locationElement.textContent = data.name;
       temperatureElement.textContent = `${Math.round(data.main.temp)}°C`;
       descriptionElement.textContent = data.weather[0].description;
-      precipitationElement.textContent = data.rain['1h'];
+      /*precipitationElement.textContent = data.rain['1h'];*/
       humidityElement.textContent = data.main.humidity;
       windElement.textContent = data.wind.speed;
       felTempElement.textContent = data.main.feels_like;
-      
       setBackground(data.weather[0].main);
       console.log(data);
       console.log(data.weather[0].main);
@@ -145,3 +144,67 @@ searchButton.addEventListener("click", () => {
         body.style.backgroundImage = "url('img/fewClouds.jpg')";
     }
   }
+
+  let debounceTimeout;
+
+  // Fetch City Suggestions
+  async function fetchCitySuggestions(query) {
+    if (!query) {
+      document.getElementById('suggestions').innerHTML = '';
+      return;
+    }
+    
+    const url = `https://api.openweathermap.org/data/2.5/find?q=${query}&type=like&sort=population&appid=${apiKey}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    displaySuggestions(data.list);
+  }
+  
+  // Display City Suggestions
+  function displaySuggestions(cities) {
+    const suggestionsDiv = document.getElementById('suggestions');
+    suggestionsDiv.innerHTML = '';
+    
+    if (!cities || cities.length === 0) {
+      suggestionsDiv.innerHTML = '<div class="suggestion-item">No results found</div>';
+      return;
+    }
+    
+    cities.forEach(city => {
+      const suggestion = document.createElement('div');
+      suggestion.className = 'suggestion-item';
+      suggestion.textContent = `${city.name}, ${city.sys.country}`;
+      
+      // Add click event to select a city and fetch its weather
+      suggestion.addEventListener('click', () => {
+        const location = `${city.name}, ${city.sys.country}`;
+        document.getElementById('locationInput').value = location;
+        suggestionsDiv.innerHTML = ''; // Clear suggestions after selection
+        
+        // Call fetchWeather function with the selected city name
+        fetchWeather(location);
+      });
+  
+      suggestionsDiv.appendChild(suggestion);
+    });
+  }
+// Debounce function for reducing API calls
+function debounce(func, delay) {
+  clearTimeout(debounceTimeout);
+  debounceTimeout = setTimeout(func, delay);
+}
+
+// Listen for input changes and fetch suggestions
+document.getElementById('locationInput').addEventListener('input', (e) => {
+  const query = e.target.value.trim();
+  debounce(() => fetchCitySuggestions(query), 300);
+});
+
+// Listen for search button click
+document.getElementById('searchButton').addEventListener('click', () => {
+  const location = document.getElementById('locationInput').value.trim();
+  if (location) {
+    fetchWeather(location);
+  }
+});
