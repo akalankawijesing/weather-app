@@ -1,6 +1,7 @@
 const apiKey = "1a20b1e108e1ef3a0dcbe57f5e90385b";
+const accuKey="RFDCPjkzOu70uzjAuOvFim4AzFsdMJQn";
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
-
+const apiUrlFoCast = "https://api.openweathermap.org/data/2.5/forecast";
 const locationInput = document.getElementById("locationInput");
 const searchButton = document.getElementById("searchButton");
 const locationElement = document.getElementById("location");
@@ -11,9 +12,12 @@ const humidityElement = document.getElementById("humidity");
 const windElement = document.getElementById("wind");
 const felTempElement = document.getElementById("felTemp");
 const dateElement = document.getElementById("date");
+const suggestionsDiv = document.getElementById('suggestions');
 
 var latitude = null;
 var longitude = null;
+
+let debounceTimeout;
 
 const x = document.getElementById("location");
 
@@ -96,9 +100,11 @@ async function fetchWeather(location = null, longitude = null, latitude = null) 
       const date = new Date((data.dt) * 1000);
       dateElement.textContent = date;
       console.log(date);
+      suggestionsDiv.style.display = 'none';
     })
     .catch((error) => {
       console.error("Error fetching weather data:", error);
+      suggestionsDiv.style.display = 'none';
     });
 }
 
@@ -145,7 +151,7 @@ searchButton.addEventListener("click", () => {
     }
   }
 
-  let debounceTimeout;
+
 
   // Fetch City Suggestions
   async function fetchCitySuggestions(query) {
@@ -163,9 +169,8 @@ searchButton.addEventListener("click", () => {
   
   // Display City Suggestions
   function displaySuggestions(cities) {
-    const suggestionsDiv = document.getElementById('suggestions');
     suggestionsDiv.innerHTML = '';
-    
+    suggestionsDiv.style.display = 'block';
     if (!cities || cities.length === 0) {
       suggestionsDiv.innerHTML = '<div class="suggestion-item">No results found</div>';
       return;
@@ -184,6 +189,7 @@ searchButton.addEventListener("click", () => {
         
         // Call fetchWeather function with the selected city name
         fetchWeather(location);
+        
       });
   
       suggestionsDiv.appendChild(suggestion);
@@ -208,3 +214,22 @@ document.getElementById('searchButton').addEventListener('click', () => {
     fetchWeather(location);
   }
 });
+
+
+async function getForecast(){
+
+  var setData = false;
+  var url = null;
+
+  if (location !== null) {
+    url = `${apiUrlFoCast}?q=${location}&appid=${apiKey}&units=metric`;
+    setData = true;
+  }
+
+  if (longitude !== null && latitude !== null) {
+    console.log("longi lati");
+    url = `${apiUrl}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+  }
+
+  const response = await fetch(url);
+}
