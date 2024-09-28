@@ -1,22 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div class="container">
-        <h1>Weather App</h1>
-        <input type="text" id="locationInput" placeholder="Enter a city">
-        <button id="searchButton">Search</button>
-        <div class="weather-info">
-            <h2 id="location"></h2>
-            <p id="temperature"></p>
-            <p id="description"></p>
+      <div
+        class="row d-flex flex-nowrap justify-content-center align-items-center gap-2"
+      >
+        <div class="col-2 logo text-start">Weather.</div>
+
+        <div
+          class="col-2 location-display d-flex justify-content-center align-items-center gap-3"
+        >
+          <span class="d-inline-block float-left">
+            <i class="fa-sharp fa-solid fa-location-dot"></i>
+          </span>
+          <span class="d-inline-block text-center align-self-center"
+            ><p id="location" class="text-center text-capitalize mb-1">
+              Loading..
+            </p></span
+          >
         </div>
+
+        <div class="col-6">
+          <div class="input-group p-1">
+            <input
+              type="text"
+              class="form-control search_input"
+              aria-label="search"
+              id="locationInput"
+              placeholder="Enter a city"
+            />
+            <button
+              class="btn search_input ml-0"
+              type="button"
+              id="searchButton"
+              style="margin-top: 10px; margin-right: 10px; margin-bottom: 10px"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+
+        <div class="col-2 userPic">
+          <img
+            src="https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png"
+            width="82"
+            height="82"
+          />
+        </div>
+      </div>
+      <div class="row weather_data">
+        <div class="col text-start p-0">
+          <span class="weather_header">Today's Weather Forecast</span>
+          <p id="date">Date</p>
+          <div
+            class="col-2 weather-display d-flex justify-content-start align-items-center gap-3"
+          >
+            <span class="d-inline-block float-left pl-0 align-bottom">
+              <p id="temperature">00</p>
+            </span>
+            <span class="d-inline-block text-center align-self-center"
+              ><p class="align-top unit text-capitalize">&deg;C</p></span
+            >
+          </div>
+          <div
+            class="col-2 more-weather-display d-flex justify-content-start align-items-center gap-3"
+          >
+            <span class="d-inline-block float-left pl-0">
+              <p>Feels</p>
+            </span>
+            <span class="d-inline-block text-center align-self-center">
+              <div
+              class="col-2 weather-display d-flex justify-content-start align-items-center gap-1"
+            >
+              <span class="d-inline-block float-left pl-0">
+                <p id="felTemp">00</p>
+              </span>
+              <span class="d-inline-block text-center align-self-center"
+                ><p class="text-center unit text-capitalize mt-1">&deg;C</p></span
+              >
+            </div>
+              </span>
+          </div>
+          
+        </div>
+        <div class="col">
+          <div class="row d-flex">
+            <div class="col d-flex justify-content-end align-items-end">
+              <img class="img-fluid" src="https://openweathermap.org/img/wn/10d@2x.png" />
+            </div>
+            <div class="col weather-description text-start align-items-start">
+
+              <p id="description" class="text-capitalize mb-0">Description</p>
+              <div class="d-flex justify-content-start align-items-center gap-3">
+                <i class="fa-solid fa-cloud-rain"></i><p class="m-0">Precipitation</p>
+                <div class="d-flex align-items-center gap-1">
+                  <p id="precipitation" class="m-0">00</p>
+                  <p class="unit text-capitalize mt-1 m-0">%</p>
+                </div>
+              </div>
+            <div class="d-flex justify-content-start align-items-center gap-3">
+              <i class="fa-solid fa-droplet"></i><p class="m-0">Humidity</p>
+              <div class="d-flex align-items-center gap-1">
+                <p id="humidity" class="m-0">00</p>
+                <p class="unit text-capitalize mt-1 m-0">%</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-start align-items-center gap-3">
+              <i class="fa-solid fa-wind"></i><p class="m-0">Wind</p>
+              <div class="d-flex align-items-center gap-1">
+                <p id="wind" class="m-0">00</p>
+                <p class="unit text-capitalize mt-1 m-0">km/h</p>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row"></div>
     </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
-</body>
+    <script></script>
+  </body>
 </html>

@@ -1,48 +1,136 @@
 body {
-    font-family: Arial, sans-serif;
-      /* background-color: #f0f0f0; */
-  
-    background-image: url('weather1.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh; /* Set the height to fill the viewport */
-    margin: 0; /* Remove default margin */
-    padding: 0; 
-  }
+  font-family: "Roboto", sans-serif !important;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #536184 !important;
+  background-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2)
+  ),
+  url("img/clearSky.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  margin: 0; 
+  padding: 0;
+}
 
 .container {
-    max-width: 400px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.5); /* Set the background color to be transparent */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adjust the alpha value here for the box shadow transparency */
-    margin-top: 105px;
+  max-width: 920px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(24, 24, 24, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin-top: 105px;
+  padding-left: 82px !important;
 }
 
 h1 {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 12px;
 }
 
 button {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .weather-info {
-    margin-top: 20px;
+  margin-top: 20px;
+}
+
+.header_bar {
+  height: 72px;
+  border: 1px solid black;
+  align-items: center;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.logo {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.location-display i {
+  font-size: 22px;
+  color: #fff;
+}
+
+.location-display #location {
+  color: #fff;
+}
+
+.search_input {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.397
+  ) !important; /* Set the background color to be transparent */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.041);
+  border-right: 0px;
+  color: #fff;
+}
+
+.weather_header {
+  font-family: "Roboto", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  font-style: normal;
+  color: #fff;
+}
+
+.weather_data {
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+  font-style: normal;
+  line-height: 1.8rem;
+}
+.weather_data #date {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.weather_data .weather-display #temperature {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-left: 0px !important;
+  padding-left: 0px !important;
+}
+
+.weather_data .weather-display .unit {
+  font-weight: 500;
+}
+
+.weather-description {
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+  font-style: normal;
+  line-height: 1.8rem;
+}
+
+.weather-description #description {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  font-style: normal;
+  color: #fff;
 }
